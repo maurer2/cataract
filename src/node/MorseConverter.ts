@@ -1,17 +1,34 @@
 import { MorseSymbols } from './MorseSymbols';
-import * as data from './MorseAlphabet.json';
+// import { MorseAlphabet } from './MorseAlphabetInterface';
+import * as alphabetList from './MorseAlphabet.json';
 
 export class MorseConverter {
-    inputText: string;
+    plainAlphabet: { [keyString: string]: string };
+    separator: string;
 
-    constructor(inputText: string) {
-        this.inputText = inputText;
+    constructor() {
+        this.plainAlphabet = alphabetList;
+        this.separator = ' ';
+    }
 
-        console.log(this.inputText);
+    convertTextToMorse(inputText: string): Array<string> {
+        const transformedInput = inputText.split('')
+            .map((entry: string) => {
+                const value: string = this.plainAlphabet[entry.toLowerCase()];
+
+                return (typeof value === 'undefined') ? this.separator : value;
+            })
+        ;
+
+        return transformedInput
     }
 }
 
 if (require.main == module) {
-    const inputParam: string = process.argv[2] || '';
-    const mc = new MorseConverter(inputParam);
+    const inputTextParam: string = process.argv[2] || '';
+    const mc = new MorseConverter();
+
+    const transformedText = mc.convertTextToMorse(inputTextParam);
+
+    console.log(transformedText);
 }

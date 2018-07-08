@@ -6,9 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "morse-ts-compile": "cd src && cd node && tsc",
-    "morse-ts-watch": "cd src && cd node && tsc -w"
+    "morse-ts-watch": "cd src && cd node && tsc -w",
+    "morse": "cd src && cd node && tsc && node ./MorseConverter.js 'lorem ipsum dolor sit amet'"
   },
   "dependencies": {
+    "typescript": "^2.9.2",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0"
