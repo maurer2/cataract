@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts">
+// https://alligator.io/vuejs/component-communication/
 import { Component, Vue } from 'vue-property-decorator';
 import MainComponent from './components/MainComponent.vue';
 import PupilsComponent from './components/PupilsComponent.vue';
@@ -43,6 +44,7 @@ export default class App extends Vue {}
 
   .layout {
     margin: auto;
+    padding: 1rem;
     flex-grow: 1;
     max-width: 980px;
     background: #c3c3c3;

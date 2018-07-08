@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "morse-ts-compile": "cd src && cd node && tsc",
+    "morse-ts-watch": "cd src && cd node && tsc -w"
   },
   "dependencies": {
     "vue": "^2.5.16",
@@ -20,7 +21,7 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "last 3 versions",
+    "not ie <= 11"
   ]
 }
