@@ -1,4 +1,5 @@
 export enum MorseSymbols {
-    DOT = 'DOT',
-    DASH = 'DASH',
+    DOT = '.',
+    DASH = '-',
+    // SPACE = ' ',
 }

@@ -4,26 +4,42 @@ var MorseSymbols_1 = require("./MorseSymbols");
 var alphabetList = require("./MorseAlphabet.json");
 var MorseConverter = /** @class */ (function () {
     function MorseConverter() {
-        var _this = this;
-        this.plainAlphabet = alphabetList;
-        this.separator = ' ';
-        // replace JSON Strings with Enums
-        this.enumAlphabet = Object.keys(this.plainAlphabet).reduce(function (total, current) {
-            var currentEntry = _this.plainAlphabet[current];
-            var enumArray = currentEntry.split('').map(function (entry) {
-                return (entry === '.') ? MorseSymbols_1.MorseSymbols.DOT : MorseSymbols_1.MorseSymbols.DASH;
+        this.enumAlphabet = Object.keys(alphabetList).reduce(function (total, currentLetter) {
+            var currentValue = alphabetList[currentLetter];
+            // replace unicode Strings with Enums
+            var symbols = currentValue.split('').map(function (currentCharacter) {
+                return (currentCharacter === '.') ? MorseSymbols_1.MorseSymbols.DOT : MorseSymbols_1.MorseSymbols.DASH;
             });
-            total[current.toString()] = enumArray;
+            total[currentLetter.toString().toLowerCase()] = symbols;
             return total;
         }, {});
     }
-    MorseConverter.prototype.convertTextToMorse = function (inputText) {
+    MorseConverter.prototype.convertTextToWords = function (text) {
+        return text.split(' ');
+    };
+    MorseConverter.prototype.convertWordToLetters = function (word) {
+        return word.split('');
+    };
+    MorseConverter.prototype.convertLetterToMorse = function (letter) {
+        return this.enumAlphabet[letter];
+    };
+    MorseConverter.prototype.convertTextToMorse = function (text) {
         var _this = this;
-        var transformedInput = inputText.split('').map(function (entry) {
-            var value = _this.plainAlphabet[entry.toLowerCase()];
-            return (typeof value === 'undefined') ? _this.separator : value;
+        var words = this.convertTextToWords(text);
+        var morseText = words.map(function (wordSingle) {
+            var wordInLetters = _this.convertWordToLetters(wordSingle);
+            var wordMorse = wordInLetters.map(_this.convertLetterToMorse, _this);
+            return wordMorse;
         });
-        return transformedInput;
+        return morseText;
+    };
+    MorseConverter.prototype.convertSingleTextToMorse = function (inputText) {
+        var _this = this;
+        var transformedInputText = inputText.split('').map(function (currentCharacter) {
+            var currentCharacterTransformed = _this.enumAlphabet[currentCharacter];
+            return currentCharacterTransformed;
+        });
+        return transformedInputText;
     };
     return MorseConverter;
 }());

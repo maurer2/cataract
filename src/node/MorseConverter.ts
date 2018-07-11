@@ -1,36 +1,59 @@
 import { MorseSymbols } from './MorseSymbols';
+import { word, wordInMorse, textInMorse } from './MorseTypes';
 import * as alphabetList from './MorseAlphabet.json';
 
 export class MorseConverter {
-    plainAlphabet: { [keyString: string]: string };
     enumAlphabet: { [keyString: string]: Array<MorseSymbols> };
-    separator: string;
 
     constructor() {
-        this.plainAlphabet = alphabetList;
-        this.separator = ' ';
+        this.enumAlphabet = Object.keys(alphabetList).reduce((total: any, currentLetter: string) => {
+            const currentValue: string = alphabetList[currentLetter];
 
-        // replace JSON Strings with Enums
-        this.enumAlphabet = Object.keys(this.plainAlphabet).reduce((total: any, current: string) => {
-            const currentEntry: string = this.plainAlphabet[current];
-            const enumArray: Array<MorseSymbols> = currentEntry.split('').map((entry: string) => {
-                return (entry === '.') ? MorseSymbols.DOT : MorseSymbols.DASH;
+            // replace unicode Strings with Enums
+            const symbols: Array<MorseSymbols> = currentValue.split('').map((currentCharacter: string) => {
+                return (currentCharacter === '.') ? MorseSymbols.DOT : MorseSymbols.DASH;
             });
 
-            total[current.toString()] = enumArray;
+            total[currentLetter.toString().toLowerCase()] = symbols;
 
             return total;
         }, {});
     }
 
-    convertTextToMorse(inputText: string): Array<string> {
-        const transformedInput = inputText.split('').map((entry: string) => {
-            const value: string = this.plainAlphabet[entry.toLowerCase()];
+    convertTextToWords(text: string): Array<string> {
+        return text.split(' ');
+    }
 
-            return (typeof value === 'undefined') ? this.separator : value;
+    convertWordToLetters(word: string): Array<string> {
+        return word.split('');
+    }
+
+    convertLetterToMorse(letter: string): Array<MorseSymbols> {
+        return this.enumAlphabet[letter];
+    }
+
+    convertTextToMorse(text: string): textInMorse {
+        const words: word = this.convertTextToWords(text);
+
+        const morseText: textInMorse = words.map((wordSingle: string) => {
+            const wordInLetters: word = this.convertWordToLetters(wordSingle);
+
+            const wordMorse: wordInMorse = wordInLetters.map(this.convertLetterToMorse, this);
+
+            return wordMorse;
         });
 
-        return transformedInput
+        return morseText;
+    }
+
+    convertSingleTextToMorse(inputText: string): Array<Array<MorseSymbols>> {
+        const transformedInputText: Array<Array<MorseSymbols>> = inputText.split('').map((currentCharacter: string) => {
+            const currentCharacterTransformed: Array<MorseSymbols> = this.enumAlphabet[currentCharacter];
+
+            return currentCharacterTransformed;
+        });
+
+        return transformedInputText;
     }
 }
 

@@ -7,9 +7,15 @@
     "build": "vue-cli-service build",
     "morse-ts-compile": "cd src && cd node && tsc",
     "morse-ts-watch": "cd src && cd node && tsc -w",
-    "morse": "cd src && cd node && tsc && node ./MorseConverter.js 'lorem ipsum dolor sit amet'"
+    "morse": "cd src && cd node && tsc && node ./MorseConverter.js 'lorem ipsum dolor sit amet'",
+    "test-morse-converter-ts": "cd src && cd node && mocha -r ts-node/register ./MorseConverter.test.ts"
   },
   "dependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.4",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.0",
     "typescript": "^2.9.2",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",

@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var MorseSymbols;
 (function (MorseSymbols) {
-    MorseSymbols["DOT"] = "DOT";
-    MorseSymbols["DASH"] = "DASH";
+    MorseSymbols["DOT"] = ".";
+    MorseSymbols["DASH"] = "-";
+    // SPACE = ' ',
 })(MorseSymbols = exports.MorseSymbols || (exports.MorseSymbols = {}));
