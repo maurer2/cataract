@@ -14,6 +14,9 @@ var MorseConverter = /** @class */ (function () {
             return total;
         }, {});
     }
+    MorseConverter.prototype.reduceToAlphaText = function (text) {
+        return text.replace(/[^a-z]/gi, '');
+    };
     MorseConverter.prototype.convertTextToWords = function (text) {
         return text.split(' ');
     };
@@ -28,18 +31,9 @@ var MorseConverter = /** @class */ (function () {
         var words = this.convertTextToWords(text);
         var morseText = words.map(function (wordSingle) {
             var wordInLetters = _this.convertWordToLetters(wordSingle);
-            var wordMorse = wordInLetters.map(_this.convertLetterToMorse, _this);
-            return wordMorse;
+            return wordInLetters.map(_this.convertLetterToMorse, _this);
         });
         return morseText;
-    };
-    MorseConverter.prototype.convertSingleTextToMorse = function (inputText) {
-        var _this = this;
-        var transformedInputText = inputText.split('').map(function (currentCharacter) {
-            var currentCharacterTransformed = _this.enumAlphabet[currentCharacter];
-            return currentCharacterTransformed;
-        });
-        return transformedInputText;
     };
     return MorseConverter;
 }());

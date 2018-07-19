@@ -20,6 +20,10 @@ export class MorseConverter {
         }, {});
     }
 
+    reduceToAlphaText(text: string): string {
+        return text.replace(/[^a-z]/gi, '');
+    }
+
     convertTextToWords(text: string): Array<string> {
         return text.split(' ');
     }
@@ -38,22 +42,10 @@ export class MorseConverter {
         const morseText: textInMorse = words.map((wordSingle: string) => {
             const wordInLetters: word = this.convertWordToLetters(wordSingle);
 
-            const wordMorse: wordInMorse = wordInLetters.map(this.convertLetterToMorse, this);
-
-            return wordMorse;
+            return wordInLetters.map(this.convertLetterToMorse, this);
         });
 
         return morseText;
-    }
-
-    convertSingleTextToMorse(inputText: string): Array<Array<MorseSymbols>> {
-        const transformedInputText: Array<Array<MorseSymbols>> = inputText.split('').map((currentCharacter: string) => {
-            const currentCharacterTransformed: Array<MorseSymbols> = this.enumAlphabet[currentCharacter];
-
-            return currentCharacterTransformed;
-        });
-
-        return transformedInputText;
     }
 }
 

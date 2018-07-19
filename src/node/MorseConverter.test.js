@@ -36,4 +36,15 @@ describe("MorseConverter", function () {
             .that.has.lengthOf(4)
             .to.deep.equal(['-', '-', '.', '.']);
     });
+    it("reduceToAlphaText removes special chars", function () {
+        var mc = new MorseConverter_1.MorseConverter();
+        var textIn = 'Test';
+        var textOut = 'Test';
+        chai_1.expect(mc.reduceToAlphaText(textIn)).to.be.an('string');
+        chai_1.expect(mc.reduceToAlphaText(textIn)).equals(textOut);
+        textIn = 'Te_"§$%&/()=?```)/st1Te22ß*2st.Te55st:T!_est_öäü@€';
+        textOut = 'TestTestTestTest';
+        chai_1.expect(mc.reduceToAlphaText(textIn)).to.be.an('string');
+        chai_1.expect(mc.reduceToAlphaText(textIn)).equals(textOut);
+    });
 });
