@@ -20,15 +20,29 @@ export class MorseConverter {
         }, {});
     }
 
+    public reduceToAlphaText(text: string): string {
+        return text.replace(/[^a-z]/gi, '');
+    }
+
+    public convertTextToWords(text: string): string[] {
+        return text.split(' ');
+    }
+
+    public convertWordToLetters(wordString: string): string[] {
+        return wordString.split('');
+    }
+
+    public convertLetterToMorse(letter: string): MorseSymbols[] {
+        return this.enumAlphabet[letter];
+    }
+
     public convertTextToMorse(text: string): textInMorse {
         const words: word = this.convertTextToWords(text);
 
         const morseText: textInMorse = words.map((wordSingle: string) => {
             const wordInLetters: word = this.convertWordToLetters(wordSingle);
 
-            const wordMorse: wordInMorse = wordInLetters.map(this.convertLetterToMorse, this);
-
-            return wordMorse;
+            return wordInLetters.map(this.convertLetterToMorse, this);
         });
 
         return morseText;
@@ -42,18 +56,6 @@ export class MorseConverter {
         });
 
         return transformedInputText;
-    }
-
-    public convertTextToWords(text: string): string[] {
-        return text.split(' ');
-    }
-
-    public convertWordToLetters(wordString: string): string[] {
-        return wordString.split('');
-    }
-
-    public convertLetterToMorse(letter: string): MorseSymbols[] {
-        return this.enumAlphabet[letter];
     }
 }
 

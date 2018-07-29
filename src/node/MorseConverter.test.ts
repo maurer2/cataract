@@ -44,4 +44,19 @@ describe("MorseConverter", () => {
             .that.has.lengthOf(4)
             .to.deep.equal(['-', '-', '.', '.'])
     });
-})
+
+    it("reduceToAlphaText removes special chars", () => {
+        const mc: MorseConverter = new MorseConverter();
+
+        let textIn = 'Test'
+        let textOut = 'Test'
+        expect(mc.reduceToAlphaText(textIn)).to.be.an('string')
+        expect(mc.reduceToAlphaText(textIn)).equals(textOut)
+
+        textIn = 'Te_"§$%&/()=?```)/st1Te22ß*2st.Te55st:T!_est_öäü@€'
+        textOut = 'TestTestTestTest'
+        expect(mc.reduceToAlphaText(textIn)).to.be.an('string')
+        expect(mc.reduceToAlphaText(textIn)).equals(textOut)
+
+    });
+});
