@@ -5,11 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "morse-ts-compile": "cd src && cd node && tsc",
-    "morse-ts-watch": "cd src && cd node && tsc -w",
-    "morse": "cd src && cd node && tsc && node ./MorseConverter.js 'lorem ipsum dolor sit amet'",
-    "test-morse-converter-ts": "cd src && cd node && mocha -r ts-node/register ./MorseConverter.test.ts",
-    "lint-morse": "node node_modules/.bin/eslint './src/node/*.js'"
+    "morse-ts-compile": "cd src && cd morse && tsc --outDir dist",
+    "morse-ts-watch": "cd src && cd morse && tsc -w --outDir dist",
+    "morse": "cd src && cd morse && tsc --outDir dist && cd dist && node ./MorseConverter.js 'lorem ipsum dolor sit amet'",
+    "test-morse-converter": "cd src && cd morse && tsc --outDir dist && mocha ./dist/MorseConverter.test.js",
+    "lint-morse": "node node_modules/.bin/eslint './src/morse/dist/*.js'"
   },
   "dependencies": {
     "@types/chai": "^4.1.4",
