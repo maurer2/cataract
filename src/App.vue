@@ -3,14 +3,13 @@
     <header class="header">Header</header>
     <main class="main">
         <PupilsComponent></PupilsComponent>
-        <MainComponent></MainComponent>
+        <MainComponent :textPlain="textPlain"></MainComponent>
     </main>
-    <footer class="footer">Footer</footer>
   </article>
 </template>
 
 <script lang="ts">
-// https://alligator.io/vuejs/component-communication/
+// https://alligator.io/vuejs/typescript-class-components/
 import { Component, Vue } from 'vue-property-decorator';
 import MainComponent from './components/MainComponent.vue';
 import PupilsComponent from './components/PupilsComponent.vue';
@@ -20,7 +19,9 @@ import PupilsComponent from './components/PupilsComponent.vue';
       MainComponent, PupilsComponent
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+    textPlain: string | boolean = 'Lorem ipsum dolor sit amet';
+}
 </script>
 
 <style lang="pcss">
@@ -56,10 +57,6 @@ export default class App extends Vue {}
 
   .main {
     display: flex;
-
-  }
-
-  .footer {
 
   }
 </style>
