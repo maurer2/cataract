@@ -1,11 +1,18 @@
 <template>
   <article class="layout">
-    <header class="header">Header - {{ text }}</header>
     <main class="main" >
         <PupilsComponent class="column" :text="text" :dotDash="dotDash"></PupilsComponent>
         <MainComponent class="column" :text="text" @update-text="updateTextPlain" @toggle-dot-dash="updateDotDash"></MainComponent>
     </main>
-    <!-- <footer class="footer">Header</footer> -->
+    <template v-if="textPlain !== ''">
+      <footer class="footer">
+        <div class="slider">
+          <div class="slider-inner">
+            <strong>Morse Code:</strong> {{ textPlain }}
+          </div>
+        </div>
+      </footer>
+    </template>
   </article>
 </template>
 
@@ -63,7 +70,7 @@ export default class App extends Vue {
 
   .layout {
     margin: auto;
-    padding: 1rem;
+    padding: 2rem;
     flex-grow: 0;
     max-width: 980px;
     background: #c3c3c3;
@@ -82,5 +89,9 @@ export default class App extends Vue {
     flex-shrink: 1;
     flex-grow: 1;
     flex-basis: 0;
+  }
+
+  .footer {
+    margin-top: 1rem;
   }
 </style>

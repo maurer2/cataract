@@ -1,19 +1,13 @@
 <template>
-  <div class="content">
-    <div class="slider">
-      <div class="slider-inner">
-        <!--
-        <h1>
-          {{ textPlain }}
-        </h1>
-        -->
-        <input :value="textPlain" type="text" placeholder="Input plaintext" @input="updateText($event.target.value)" />
-      </div>
-    </div>
-    <button @click="toggleDotDash">
-      Dummy
+  <form class="content">
+    <label for="textplain" class="label">Plaintext</label>
+    <input class="input" type="text" name="textplain" id="textplain" placeholder="Plaintext"
+      :value="textPlain" @input="updateText($event.target.value)" />
+
+    <button class="button" type="button" @click.prevent="toggleDotDash">
+      Dummy Test
     </button>
-  </div>
+  </form>
 </template>
 
 <script lang="ts">
@@ -48,6 +42,32 @@ export default class Main extends Vue {
 }
 </script>
 
-<style lang="pcss" scoped>
+<style lang="scss" scoped>
+%defaulInputStyles {
+  user-select: none;
+  border: 1px solid black;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0;
+}
 
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  @extend %defaulInputStyles;
+
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.button {
+  @extend %defaulInputStyles;
+
+  display: inline-block;
+  text-align: center;
+}
 </style>

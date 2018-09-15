@@ -47,7 +47,7 @@ export default class PupilsComponent extends Vue {
   }
 
   &-left {
-    top: 18%;
+    top: 19%;
     left: 9%;
   }
 
