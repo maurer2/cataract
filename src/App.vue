@@ -1,10 +1,11 @@
 <template>
   <article class="layout">
-    <header class="header">Header</header>
-    <main class="main">
-        <PupilsComponent></PupilsComponent>
-        <MainComponent :textPlain="textPlain"></MainComponent>
+    <header class="header">Header - {{ text }}</header>
+    <main class="main" >
+        <PupilsComponent class="column" :text="text"></PupilsComponent>
+        <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
     </main>
+    <!-- <footer class="footer">Header</footer> -->
   </article>
 </template>
 
@@ -20,43 +21,56 @@ import PupilsComponent from './components/PupilsComponent.vue';
   },
 })
 export default class App extends Vue {
-    textPlain: string | boolean = 'Lorem ipsum dolor sit amet';
+    textPlain: string | boolean = false;
+
+    get text() {
+      return (this.textPlain === false) ? '': this.textPlain;
+    }
+
+    updateTextPlain(value: string) {
+      this.textPlain = value;
+    }
 }
 </script>
 
 <style lang="pcss">
+  :root {
+    --background: #a9a9a9;
+    --foreground: #c13c86;
+  }
+
   html {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     height: 100%;
-    font-size: 16px;
-    background-image: radial-gradient(salmon 20%, transparent 0);
-    background-size: 2vh 2vh;
+    font-size: 1rem;
+    background: var(--background);
   }
 
-  body {
+  .wrapper {
     display: flex;
     margin: 0;
     min-height: 100%;
-    color: #2c3e50;
   }
 
   .layout {
     margin: auto;
     padding: 1rem;
-    flex-grow: 1;
+    flex-grow: 0;
     max-width: 980px;
     background: #c3c3c3;
-  }
-
-  .header {
-
+    color: var(--foreground);
   }
 
   .main {
     display: flex;
+  }
 
+  .column {
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: 0;
   }
 </style>

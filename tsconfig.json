@@ -23,7 +23,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "strictPropertyInitialization": false, // https://github.com/vuejs/vue-cli/issues/834#issuecomment-366534774
   },
   "include": [
     "src/**/*.ts",
@@ -35,5 +36,5 @@
   "exclude": [
     "node_modules",
     "*.test.ts"
-  ]
+  ],
 }

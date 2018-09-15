@@ -29,6 +29,7 @@ export default class PupilsComponent extends Vue {
 <style lang="scss" scoped>
 .figure {
   position: relative;
+  margin: 0;
 }
 
 .pupil {

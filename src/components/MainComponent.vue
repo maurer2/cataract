@@ -2,31 +2,39 @@
   <div class="content">
     <div class="slider">
       <div class="slider-inner">
-       {{ textValue }}
+        <!--
+        <h1>
+          {{ textPlain }}
+        </h1>
+        -->
       </div>
     </div>
-    <input v-model="textValue" type="text" placeholder="Text eingeben"  />
+    <input :value="textPlain" type="text" placeholder="Input plaintext" @input="updateText($event.target.value)" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component
+// https://github.com/vuejs/vue-class-component/issues/220#issuecomment-381557825
+@Component<Main>({
+  props: {
+    text: [String, Boolean],
+  }
+})
 export default class Main extends Vue {
-    @Prop({ default: false, type: [String, Boolean] })
-    textPlain: string | boolean;
+    protected text!: [String, Boolean]; // https://github.com/kaorun343/vue-property-decorator/issues/81
 
     constructor(){
         super();
     }
 
-    get textValue() {
-        return this.textPlain;
+    get textPlain() {
+        return this.text;
     }
 
-    set textValue(value) {
-        this.textPlain = value;
+    updateText(value: string) {
+      const textPlain = this.$emit('update-text', value);
     }
 }
 </script>
