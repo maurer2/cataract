@@ -7,9 +7,12 @@
           {{ textPlain }}
         </h1>
         -->
+        <input :value="textPlain" type="text" placeholder="Input plaintext" @input="updateText($event.target.value)" />
       </div>
     </div>
-    <input :value="textPlain" type="text" placeholder="Input plaintext" @input="updateText($event.target.value)" />
+    <button @click="toggleDotDash">
+      Dummy
+    </button>
   </div>
 </template>
 
@@ -23,18 +26,24 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Main extends Vue {
-    protected text!: [String, Boolean]; // https://github.com/kaorun343/vue-property-decorator/issues/81
+    private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
+    private isDot: boolean = true;
 
     constructor(){
         super();
     }
 
     get textPlain() {
-        return this.text;
+        return this.text ;
     }
 
     updateText(value: string) {
-      const textPlain = this.$emit('update-text', value);
+      this.$emit('update-text', value);
+    }
+
+    toggleDotDash() {
+      this.isDot = !this.isDot;
+      this.$emit('toggle-dot-dash', this.isDot);
     }
 }
 </script>

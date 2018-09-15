@@ -2,24 +2,21 @@
   <div>
     <figure class="figure">
       <img src="../assets/pupils.jpg" class="image" alt="cat" />
-      <div class="pupil pupil-left" v-bind:class="{ 'pupil--is-dash': isDash }"></div>
-      <div class="pupil pupil-right" v-bind:class="{ 'pupil--is-dash': isDash }"></div>
+      <div class="pupil pupil-left" v-bind:class="{ 'pupil--is-dash': dotDash === false }"></div>
+      <div class="pupil pupil-right" v-bind:class="{ 'pupil--is-dash': dotDash === false }"></div>
     </figure>
-    <button @click="isDash = !isDash">
-      Click
-    </button>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component
+@Component<PupilsComponent>({
+  props: {
+    dotDash: Boolean,
+  }
+})
 export default class PupilsComponent extends Vue {
-    //@Prop()
-    //currentSignal: string= '';
-    private isDash: boolean = true;
-
     constructor(){
         super();
     }
@@ -30,6 +27,10 @@ export default class PupilsComponent extends Vue {
 .figure {
   position: relative;
   margin: 0;
+}
+
+.image {
+  display: block;
 }
 
 .pupil {

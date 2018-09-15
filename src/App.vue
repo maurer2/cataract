@@ -2,8 +2,8 @@
   <article class="layout">
     <header class="header">Header - {{ text }}</header>
     <main class="main" >
-        <PupilsComponent class="column" :text="text"></PupilsComponent>
-        <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
+        <PupilsComponent class="column" :text="text" :dotDash="dotDash"></PupilsComponent>
+        <MainComponent class="column" :text="text" @update-text="updateTextPlain" @toggle-dot-dash="updateDotDash"></MainComponent>
     </main>
     <!-- <footer class="footer">Header</footer> -->
   </article>
@@ -21,14 +21,20 @@ import PupilsComponent from './components/PupilsComponent.vue';
   },
 })
 export default class App extends Vue {
-    textPlain: string | boolean = false;
+    textPlain: string = '';
+    dotDash: boolean = false;
 
     get text() {
-      return (this.textPlain === false) ? '': this.textPlain;
+      return this.textPlain;
     }
 
     updateTextPlain(value: string) {
       this.textPlain = value;
+    }
+
+    updateDotDash(value: boolean){
+      this.dotDash = value;
+      console.log('toggle', this.dotDash);
     }
 }
 </script>
@@ -66,9 +72,13 @@ export default class App extends Vue {
 
   .main {
     display: flex;
+    margin-left: -1rem;
+    margin-right: -1rem;
   }
 
   .column {
+    margin-left: 1rem;
+    margin-right: 1rem;
     flex-shrink: 1;
     flex-grow: 1;
     flex-basis: 0;
