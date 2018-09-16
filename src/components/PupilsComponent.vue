@@ -3,7 +3,7 @@
     <figure class="figure">
       <img src="../assets/pupils.jpg" class="image" alt="cat" />
       <div class="pupil pupil-left" :class="pupilState" ref="pupil-left"></div>
-      <div class="pupil pupil-right" :class="{ 'pupil--is-dash': dotDash === false }" ref="pupil-right"></div>
+      <div class="pupil pupil-right" :class="pupilState" ref="pupil-right"></div>
     </figure>
   </div>
 </template>
@@ -18,43 +18,55 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 })
 export default class PupilsComponent extends Vue {
   private dotDash!: Boolean;
-  private supportsWebanimations: boolean = false;
+  private hasWebanimationsSupport: boolean = false;
   private isMounted: boolean = false;
 
   constructor(){
       super();
   }
 
-  created() {
-    if ('animate' in document.body) {
-      this.supportsWebanimations = true;
-    }
-  }
-
   mounted(){
     this.isMounted = true;
+
+    if ('animate' in document.body) {
+        this.hasWebanimationsSupport = true;
+    }
   }
 
-  get pupilState() {
-    if(!this.isMounted || !this.supportsWebanimations) {
-      return {
-        'pupil--is-dash': this.dotDash === true,
-      }
-    }
+  setPupils() {
+    const pupilLeft: any = this.$refs['pupil-left'];
+    const pupilRight: any = this.$refs['pupil-right'];
 
-    if (this.supportsWebanimations) {
-      const pupilLeft: any = this.$refs['pupil-left'];
-
-      pupilLeft.animate([
-        { transform: (this.dotDash === false) ? 'scaleX(1)' : 'scaleX(0.5)' },
-        { transform: (this.dotDash === false) ? 'scaleX(0.5)' : 'scaleX(1)' },
+    [pupilLeft, pupilRight].forEach((pupil) => {
+      pupil.animate([
+          { transform: (this.dotDash === false) ? 'scaleX(1)' : 'scaleX(0.5)' },
+          { transform: (this.dotDash === false) ? 'scaleX(0.5)' : 'scaleX(1)' },
       ], {
           duration: 200,
           iterations: 1,
+          fill: 'forwards', // fill-mode
       });
+    });
+  }
+
+  setPupilsFallback() {
+    return {
+      'pupil--is-dash': this.dotDash === true,
+    }
+  }
+
+  get pupilState() {
+    if(!this.isMounted) {
+      return {};
+    }
+
+    if (this.hasWebanimationsSupport) {
+      this.setPupils();
 
       return {};
     }
+
+    return this.setPupilsFallback();
   }
 }
 </script>

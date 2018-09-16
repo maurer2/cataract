@@ -29,7 +29,7 @@ import PupilsComponent from './components/PupilsComponent.vue';
 })
 export default class App extends Vue {
     textPlain: string = '';
-    dotDash: boolean = false;
+    dotDash: boolean = true;
 
     get text() {
       return this.textPlain;
@@ -41,7 +41,6 @@ export default class App extends Vue {
 
     updateDotDash(value: boolean){
       this.dotDash = value;
-      console.log('toggle', this.dotDash);
     }
 }
 </script>
