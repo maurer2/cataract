@@ -1,8 +1,8 @@
 <template>
   <article class="layout">
-    <main class="main" >
-        <PupilsComponent class="column" :text="text" :dotDash="dotDash"></PupilsComponent>
-        <MainComponent class="column" :text="text" @update-text="updateTextPlain" @toggle-dot-dash="updateDotDash"></MainComponent>
+    <main class="main">
+        <PupilsComponent class="column" :text="text"></PupilsComponent>
+        <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
     </main>
     <template v-if="textPlain !== ''">
       <footer class="footer">
@@ -29,7 +29,10 @@ import PupilsComponent from './components/PupilsComponent.vue';
 })
 export default class App extends Vue {
     textPlain: string = '';
-    dotDash: boolean = true;
+
+    constructor() {
+        super();
+    }
 
     get text() {
       return this.textPlain;
@@ -37,10 +40,6 @@ export default class App extends Vue {
 
     updateTextPlain(value: string) {
       this.textPlain = value;
-    }
-
-    updateDotDash(value: boolean){
-      this.dotDash = value;
     }
 }
 </script>

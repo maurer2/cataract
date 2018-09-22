@@ -17,7 +17,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class PupilsComponent extends Vue {
-  private dotDash!: Boolean;
   private hasWebanimationsSupport: boolean = false;
   private isMounted: boolean = false;
 
@@ -39,8 +38,8 @@ export default class PupilsComponent extends Vue {
 
     [pupilLeft, pupilRight].forEach((pupil) => {
       pupil.animate([
-          { transform: (this.dotDash === false) ? 'scaleX(1)' : 'scaleX(0.5)' },
-          { transform: (this.dotDash === false) ? 'scaleX(0.5)' : 'scaleX(1)' },
+          { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1)' },
+          { transform: (this.isDot) ? 'scaleX(1)' : 'scaleX(0.5)' },
       ], {
           duration: 200,
           iterations: 1,
@@ -51,8 +50,12 @@ export default class PupilsComponent extends Vue {
 
   setPupilsFallback() {
     return {
-      'pupil--is-dash': this.dotDash === true,
+      'pupil--is-dash': this.isDot,
     }
+  }
+
+  get isDot() {
+      return this.$store.state.isDot;
   }
 
   get pupilState() {

@@ -5,7 +5,7 @@
       :value="textPlain" @input="updateText($event.target.value)" />
 
     <button class="button" type="button" @click.prevent="toggleDotDash">
-      Dummy Test
+      Eye Test
     </button>
   </form>
 </template>
@@ -21,7 +21,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 })
 export default class Main extends Vue {
     private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
-    private isDot: boolean = true;
 
     constructor(){
         super();
@@ -36,8 +35,7 @@ export default class Main extends Vue {
     }
 
     toggleDotDash() {
-      this.isDot = !this.isDot;
-      this.$emit('toggle-dot-dash', this.isDot);
+      this.$store.commit('alternateDotDash');
     }
 }
 </script>
