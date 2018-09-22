@@ -50,6 +50,12 @@ export default class App extends Vue {
     --foreground: #c13c86;
   }
 
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
   html {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -57,10 +63,11 @@ export default class App extends Vue {
     margin: 0;
     height: 100%;
     font-size: 1rem;
+    box-sizing: border-box;
     background: var(--background);
   }
 
-  .wrapper {
+  body {
     display: flex;
     margin: 0;
     min-height: 100%;
@@ -69,10 +76,10 @@ export default class App extends Vue {
   .layout {
     margin: auto;
     padding: 2rem;
-    flex-grow: 0;
-    max-width: 980px;
+    flex-grow: 1;
     background: #c3c3c3;
     color: var(--foreground);
+    max-width: 90vw;
   }
 
   .main {

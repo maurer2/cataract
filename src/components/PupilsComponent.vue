@@ -82,6 +82,8 @@ export default class PupilsComponent extends Vue {
 
 .image {
   display: block;
+  width: 100%;
+  height: auto;
 }
 
 .pupil {
@@ -100,12 +102,12 @@ export default class PupilsComponent extends Vue {
 
   &-left {
     top: 19%;
-    left: 9%;
+    left: 13.5%;
   }
 
   &-right {
-    left: 63%;
-    top: 31%;
+    right: 17%;
+    top: 32%;
   }
 }
 </style>
