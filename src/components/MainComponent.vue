@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { MorseConverter } from '../morse/MorseConverter';
 
 // https://github.com/vuejs/vue-class-component/issues/220#issuecomment-381557825
 @Component<Main>({
@@ -20,15 +21,26 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 })
 export default class Main extends Vue {
   // private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
+  private mc: MorseConverter;
 
   constructor(){
     super();
+
+    this.$store.subscribe((mutation) => {
+      if (mutation.type === 'updateTextPlain'){
+        this.updateMorse();
+      }
+    })
   }
 
   updateText(event: Event) {
     const newText: string = event.target.value;
 
     this.$store.dispatch('updatePlainText', newText);
+  }
+
+  updateMorse() {
+    
   }
 
   toggleDotDash() {

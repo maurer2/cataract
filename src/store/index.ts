@@ -23,7 +23,7 @@ const store = () => new Vuex.Store<any>({
     },
   },
   state: {
-    isDot: true,
+    isDot: false,
     textMorse: [],
     textPlain: '',
   },

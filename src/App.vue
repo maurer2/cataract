@@ -2,7 +2,7 @@
   <article class="layout">
     <PupilsComponent class="column"></PupilsComponent>
     <MainComponent class="column"></MainComponent>
-    <SlideTextComponent class="column column--full" v-if="textPlain !== ''"></SlideTextComponent>
+    <SlideTextComponent class="column column--full"></SlideTextComponent>
   </article>
 </template>
 
@@ -21,10 +21,6 @@ import SlideTextComponent from './components/SlideTextComponent.vue';
 export default class App extends Vue {
   constructor() {
     super();
-  }
-
-  get textPlain() {
-    return this.$store.state.textPlain;
   }
 }
 </script>

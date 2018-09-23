@@ -1,7 +1,10 @@
 <template>
   <div class="slider">
     <div class="slider-inner">
-      <strong>Morse Code:</strong> {{ textPlain }}
+      <strong>Morse Code:</strong>
+      <template v-if="textPlain !== ''">
+        {{ textPlain }}
+      </template>
     </div>
   </div>
 </template>
@@ -27,6 +30,6 @@ export default class SlideTextComponent extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="pcss" scoped>
 
 </style>

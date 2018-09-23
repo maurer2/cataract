@@ -24,10 +24,7 @@ export default class PupilsComponent extends Vue {
 
   mounted(){
     this.isMounted = true;
-
-    if ('animate' in document.body) {
-      this.hasWebanimationsSupport = true;
-    }
+    this.hasWebanimationsSupport = ('animate' in document.body) ? true : this.hasWebanimationsSupport;
   }
 
   setPupils() {
@@ -36,10 +33,10 @@ export default class PupilsComponent extends Vue {
 
     [pupilLeft, pupilRight].forEach((pupil) => {
       pupil.animate([
-        { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1)' },
-        { transform: (this.isDot) ? 'scaleX(1)' : 'scaleX(0.5)' },
+        { transform: (this.isDot) ? 'scaleX(1.0)' : 'scaleX(0.5)' },
+        { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1.0)' },
       ], {
-        duration: 200,
+        duration: 150,
         iterations: 1,
         fill: 'forwards', // fill-mode
       });
@@ -48,7 +45,7 @@ export default class PupilsComponent extends Vue {
 
   setPupilsFallback() {
     return {
-      'pupil--is-dash': this.isDot,
+      'pupil--is-dot': this.isDot,
     }
   }
 
@@ -72,7 +69,7 @@ export default class PupilsComponent extends Vue {
 }
 </script>
 
-<style lang="pcss" scoped>
+<style lang="scss" scoped>
 .figure {
   position: relative;
 }
@@ -90,10 +87,10 @@ export default class PupilsComponent extends Vue {
   border-radius: 50%;
   background: black;
   transform: scaleX(1);
-  transition: transform 0.2s;
+  transition: transform 0.15s;
   animation-fill-mode: forwards;
 
-  &--is-dash {
+  &--is-dot{
     transform: scaleX(0.5);
   }
 
