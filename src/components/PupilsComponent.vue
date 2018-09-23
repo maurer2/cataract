@@ -19,14 +19,14 @@ export default class PupilsComponent extends Vue {
   private isMounted: boolean = false;
 
   constructor(){
-      super();
+    super();
   }
 
   mounted(){
     this.isMounted = true;
 
     if ('animate' in document.body) {
-        this.hasWebanimationsSupport = true;
+      this.hasWebanimationsSupport = true;
     }
   }
 
@@ -36,12 +36,12 @@ export default class PupilsComponent extends Vue {
 
     [pupilLeft, pupilRight].forEach((pupil) => {
       pupil.animate([
-          { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1)' },
-          { transform: (this.isDot) ? 'scaleX(1)' : 'scaleX(0.5)' },
+        { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1)' },
+        { transform: (this.isDot) ? 'scaleX(1)' : 'scaleX(0.5)' },
       ], {
-          duration: 200,
-          iterations: 1,
-          fill: 'forwards', // fill-mode
+        duration: 200,
+        iterations: 1,
+        fill: 'forwards', // fill-mode
       });
     });
   }
@@ -53,7 +53,7 @@ export default class PupilsComponent extends Vue {
   }
 
   get isDot() {
-      return this.$store.state.isDot;
+    return this.$store.state.isDot;
   }
 
   get pupilState() {

@@ -1,14 +1,32 @@
 import Vuex from 'vuex';
 
 const store = () => new Vuex.Store<any>({
-    mutations: {
-        alternateDotDash(state) {
-            state.isDot = !state.isDot;
-        }
+  actions: {
+    toggleDotDash(context) {
+      context.commit('toggleDotDash');
     },
-    state: {
-        isDot: true,
+    updatePlainText(context, data) {
+      context.commit('updateTextPlain', data);
     },
+  },
+  getters: {
+    morseTextPerCharacter: (state) => {
+      return state.textMorse as any;
+    },
+  },
+  mutations: {
+    toggleDotDash(state) {
+      state.isDot = !state.isDot;
+    },
+    updateTextPlain(state, value) {
+      state.textPlain = value;
+    },
+  },
+  state: {
+    isDot: true,
+    textMorse: [],
+    textPlain: '',
+  },
 });
 
 export default store;

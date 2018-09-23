@@ -1,8 +1,8 @@
 <template>
   <article class="layout">
-    <PupilsComponent class="column" :text="text"></PupilsComponent>
-    <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
-    <SlideTextComponent class="column column--full" :text="text" v-if="textPlain !== ''"></SlideTextComponent>
+    <PupilsComponent class="column"></PupilsComponent>
+    <MainComponent class="column"></MainComponent>
+    <SlideTextComponent class="column column--full" v-if="textPlain !== ''"></SlideTextComponent>
   </article>
 </template>
 
@@ -19,18 +19,12 @@ import SlideTextComponent from './components/SlideTextComponent.vue';
   },
 })
 export default class App extends Vue {
-  private textPlain: string = '';
-
   constructor() {
-      super();
+    super();
   }
 
-  get text() {
-    return this.textPlain;
-  }
-
-  updateTextPlain(value: string) {
-    this.textPlain = value;
+  get textPlain() {
+    return this.$store.state.textPlain;
   }
 }
 </script>

@@ -1,8 +1,7 @@
 <template>
   <form class="content">
-    <label for="textplain" class="label">Plaintext</label>
-    <input class="input" type="text" name="textplain" id="textplain" placeholder="Plaintext"
-      :value="textPlain" @input="updateText($event.target.value)" />
+    <label for="textplain" class="label">Input plaintext</label>
+    <input class="input" type="text" id="textplain" placeholder="Plaintext" :value="textPlain" @input="updateText" />
 
     <button class="button" type="button" @click.prevent="toggleDotDash">
       Eye Test
@@ -20,22 +19,24 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Main extends Vue {
-  private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
+  // private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
 
   constructor(){
-      super();
+    super();
   }
 
-  get textPlain() {
-      return this.text ;
-  }
+  updateText(event: Event) {
+    const newText: string = event.target.value;
 
-  updateText(value: string) {
-    this.$emit('update-text', value);
+    this.$store.dispatch('updatePlainText', newText);
   }
 
   toggleDotDash() {
-    this.$store.commit('alternateDotDash');
+    this.$store.dispatch('toggleDotDash');
+  }
+
+  get textPlain() {
+    return this.$store.state.textPlain;
   }
 }
 </script>

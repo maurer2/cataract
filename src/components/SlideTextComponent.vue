@@ -1,7 +1,7 @@
 <template>
   <div class="slider">
     <div class="slider-inner">
-      <strong>Morse Code:</strong> {{ text }}
+      <strong>Morse Code:</strong> {{ textPlain }}
     </div>
   </div>
 </template>
@@ -18,7 +18,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 export default class SlideTextComponent extends Vue {
   constructor(){
-      super();
+    super();
+  }
+
+  get textPlain() {
+    return this.$store.state.textPlain;
   }
 }
 </script>
