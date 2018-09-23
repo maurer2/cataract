@@ -20,27 +20,27 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Main extends Vue {
-    private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
+  private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
 
-    constructor(){
-        super();
-    }
+  constructor(){
+      super();
+  }
 
-    get textPlain() {
-        return this.text ;
-    }
+  get textPlain() {
+      return this.text ;
+  }
 
-    updateText(value: string) {
-      this.$emit('update-text', value);
-    }
+  updateText(value: string) {
+    this.$emit('update-text', value);
+  }
 
-    toggleDotDash() {
-      this.$store.commit('alternateDotDash');
-    }
+  toggleDotDash() {
+    this.$store.commit('alternateDotDash');
+  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="pcss" scoped>
 %defaulInputStyles {
   user-select: none;
   border: 1px solid black;

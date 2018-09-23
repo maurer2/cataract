@@ -24,6 +24,15 @@
     "eslint-plugin-react": "^7.10.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.3",
+    "postcss-extend": "^1.0.5",
+    "postcss-import": "^12.0.0",
+    "postcss-inline-comment": "^3.0.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-nesting": "^7.0.0",
+    "postcss-preset-env": "^6.0.4",
+    "postcss-scss": "^2.0.0",
+    "postcss-short-color": "^3.0.0",
+    "postcss-strip-inline-comments": "^0.1.5",
     "sass-loader": "^7.1.0",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2",
@@ -42,6 +51,20 @@
   "browserslist": [
     "> 1%",
     "last 3 versions",
-    "not ie < 11"
-  ]
+    "not last 2 ie version",
+    "last 1 ie version"
+  ],
+  "postcss": {
+    "syntax": "postcss-scss",
+    "plugins": {
+      "postcss-import": {},
+      "postcss-nesting": {
+        "preserveEmpty": true
+      },
+      "postcss-short-color": {},
+      "postcss-strip-inline-comments": {},
+      "postcss-nested": {},
+      "postcss-extend": {}
+    }
+  }
 }

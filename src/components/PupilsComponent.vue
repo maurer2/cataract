@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <figure class="figure">
-      <img src="../assets/pupils.jpg" class="image" alt="cat" />
-      <div class="pupil pupil-left" :class="pupilState" ref="pupil-left"></div>
-      <div class="pupil pupil-right" :class="pupilState" ref="pupil-right"></div>
-    </figure>
-  </div>
+  <figure class="figure">
+    <img src="../assets/pupils.jpg" class="image" alt="cat" />
+    <div class="pupil pupil-left" :class="pupilState" ref="pupil-left"></div>
+    <div class="pupil pupil-right" :class="pupilState" ref="pupil-right"></div>
+  </figure>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component<PupilsComponent>({
   props: {
@@ -74,10 +72,9 @@ export default class PupilsComponent extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="pcss" scoped>
 .figure {
   position: relative;
-  margin: 0;
 }
 
 .image {

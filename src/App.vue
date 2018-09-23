@@ -1,18 +1,8 @@
 <template>
   <article class="layout">
-    <main class="main">
-        <PupilsComponent class="column" :text="text"></PupilsComponent>
-        <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
-    </main>
-    <template v-if="textPlain !== ''">
-      <footer class="footer">
-        <div class="slider">
-          <div class="slider-inner">
-            <strong>Morse Code:</strong> {{ textPlain }}
-          </div>
-        </div>
-      </footer>
-    </template>
+    <PupilsComponent class="column" :text="text"></PupilsComponent>
+    <MainComponent class="column" :text="text" @update-text="updateTextPlain"></MainComponent>
+    <SlideTextComponent class="column column--full" :text="text" v-if="textPlain !== ''"></SlideTextComponent>
   </article>
 </template>
 
@@ -21,32 +11,34 @@
 import { Component, Vue } from 'vue-property-decorator';
 import MainComponent from './components/MainComponent.vue';
 import PupilsComponent from './components/PupilsComponent.vue';
+import SlideTextComponent from './components/SlideTextComponent.vue';
 
 @Component({
   components: {
-      MainComponent, PupilsComponent
+      MainComponent, PupilsComponent, SlideTextComponent
   },
 })
 export default class App extends Vue {
-    textPlain: string = '';
+  private textPlain: string = '';
 
-    constructor() {
-        super();
-    }
+  constructor() {
+      super();
+  }
 
-    get text() {
-      return this.textPlain;
-    }
+  get text() {
+    return this.textPlain;
+  }
 
-    updateTextPlain(value: string) {
-      this.textPlain = value;
-    }
+  updateTextPlain(value: string) {
+    this.textPlain = value;
+  }
 }
 </script>
 
 <style lang="pcss">
   :root {
     --background: #a9a9a9;
+    --background-secondary: #c3c3c3;
     --foreground: #c13c86;
   }
 
@@ -70,33 +62,27 @@ export default class App extends Vue {
   body {
     display: flex;
     margin: 0;
+    justify-content: center;
+    align-items: center;
     min-height: 100%;
   }
 
   .layout {
-    margin: auto;
-    padding: 2rem;
-    flex-grow: 1;
-    background: #c3c3c3;
-    color: var(--foreground);
-    max-width: 90vw;
-  }
-
-  .main {
     display: flex;
-    margin-left: -1rem;
-    margin-right: -1rem;
+    max-width: 90vw;
+    flex-wrap: wrap;
+    background: var(--background-secondary);
+    color: var(--foreground);
   }
 
   .column {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin: 2rem;
     flex-shrink: 1;
     flex-grow: 1;
     flex-basis: 0;
   }
 
-  .footer {
-    margin-top: 1rem;
+  .column--full {
+    flex-basis: 100%; // force break to new line
   }
 </style>
