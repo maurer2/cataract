@@ -35,7 +35,11 @@ export default class Main extends Vue {
     (this as any).$store.dispatch('updatePlainText', newText);
   }
 
-  updateMorse() {}
+  updateMorse() {
+    // dummy stuff
+    const encodedText = [ '.', '-', '.', '.' ];
+    (this as any).$store.dispatch('updateMorseText', encodedText);
+  }
 
   toggleDotDash() {
     (this as any).$store.dispatch('toggleDotDash');

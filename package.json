@@ -35,7 +35,6 @@
     "postcss-strip-inline-comments": "^0.1.5",
     "sass-loader": "^7.1.0",
     "ts-node": "^7.0.0",
-    "tsc": "^1.20150623.0",
     "typescript": "^2.9.2",
     "typescript-eslint-parser": "^16.0.1",
     "vue": "^2.5.16",

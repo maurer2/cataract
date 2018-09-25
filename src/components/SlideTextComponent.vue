@@ -20,7 +20,7 @@ export default class SlideTextComponent extends Vue {
   }
 
   get textPlain() {
-    return (this as any).$store.state.textPlain;
+    return (this as any).$store.getters.morseTextAsString;
   }
 }
 </script>

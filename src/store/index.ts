@@ -8,10 +8,16 @@ const store = () => new Vuex.Store<any>({
     updatePlainText(context, data) {
       context.commit('updateTextPlain', data);
     },
+    updateMorseText(context, data) {
+      context.commit('updateTextMorse', data);
+    },
   },
   getters: {
     morseTextPerCharacter: (state) => {
       return state.textMorse as any;
+    },
+    morseTextAsString: (state) => {
+      return state.textMorse.join('  ');
     },
   },
   mutations: {
@@ -20,6 +26,9 @@ const store = () => new Vuex.Store<any>({
     },
     updateTextPlain(state, value) {
       state.textPlain = value;
+    },
+    updateTextMorse(state, value) {
+      state.textMorse = value;
     },
   },
   state: {
