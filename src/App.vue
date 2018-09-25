@@ -25,7 +25,7 @@ export default class App extends Vue {
 }
 </script>
 
-<style lang="pcss">
+<style lang="scss">
   :root {
     --background: #a9a9a9;
     --background-secondary: #c3c3c3;

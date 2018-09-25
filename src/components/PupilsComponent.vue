@@ -9,11 +9,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component<PupilsComponent>({
-  props: {
-    dotDash: Boolean,
-  }
-})
+@Component<PupilsComponent>({})
 export default class PupilsComponent extends Vue {
   private hasWebanimationsSupport: boolean = false;
   private isMounted: boolean = false;
@@ -50,7 +46,7 @@ export default class PupilsComponent extends Vue {
   }
 
   get isDot() {
-    return this.$store.state.isDot;
+    return (this as any).$store.state.isDot;
   }
 
   get pupilState() {

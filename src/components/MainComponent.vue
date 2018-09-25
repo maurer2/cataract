@@ -14,11 +14,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { MorseConverter } from '../morse/MorseConverter';
 
 // https://github.com/vuejs/vue-class-component/issues/220#issuecomment-381557825
-@Component<Main>({
-  props: {
-    text: [String, Boolean],
-  }
-})
+@Component<Main>({})
 export default class Main extends Vue {
   // private text!: string; // https://github.com/kaorun343/vue-property-decorator/issues/81
   private mc: MorseConverter;
@@ -26,7 +22,7 @@ export default class Main extends Vue {
   constructor(){
     super();
 
-    this.$store.subscribe((mutation) => {
+    (this as any).$store.subscribe((mutation: any) => {
       if (mutation.type === 'updateTextPlain'){
         this.updateMorse();
       }
@@ -34,26 +30,24 @@ export default class Main extends Vue {
   }
 
   updateText(event: Event) {
-    const newText: string = event.target.value;
+    const newText: string = (event.target as any).value;
 
-    this.$store.dispatch('updatePlainText', newText);
+    (this as any).$store.dispatch('updatePlainText', newText);
   }
 
-  updateMorse() {
-    
-  }
+  updateMorse() {}
 
   toggleDotDash() {
-    this.$store.dispatch('toggleDotDash');
+    (this as any).$store.dispatch('toggleDotDash');
   }
 
   get textPlain() {
-    return this.$store.state.textPlain;
+    return (this as any).$store.state.textPlain;
   }
 }
 </script>
 
-<style lang="pcss" scoped>
+<style lang="scss" scoped>
 %defaulInputStyles {
   user-select: none;
   border: 1px solid black;

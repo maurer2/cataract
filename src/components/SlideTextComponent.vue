@@ -13,19 +13,14 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 // https://github.com/vuejs/vue-class-component/issues/220#issuecomment-381557825
-@Component<SlideTextComponent>({
-  props: {
-    text: [String, Boolean],
-  }
-})
-
+@Component<SlideTextComponent>({})
 export default class SlideTextComponent extends Vue {
   constructor(){
     super();
   }
 
   get textPlain() {
-    return this.$store.state.textPlain;
+    return (this as any).$store.state.textPlain;
   }
 }
 </script>
