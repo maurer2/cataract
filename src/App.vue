@@ -1,8 +1,21 @@
 <template>
   <article class="layout">
-    <PupilsComponent class="column"></PupilsComponent>
-    <MainComponent class="column"></MainComponent>
-    <SlideTextComponent class="column column--full"></SlideTextComponent>
+    <div class="row">
+      <div class="column">
+        <PupilsComponent></PupilsComponent>
+      </div>
+      <div class="column">
+        <MainComponent></MainComponent>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column column--auto-width">
+        <strong>Morse Code:</strong>
+      </div>
+      <div class="column">
+        <SlideTextComponent></SlideTextComponent>
+      </div>
+    </div>
   </article>
 </template>
 
@@ -30,6 +43,7 @@ export default class App extends Vue {
     --background: #a9a9a9;
     --background-secondary: #c3c3c3;
     --foreground: #c13c86;
+    --spacing: 15px;
   }
 
   *,
@@ -58,21 +72,27 @@ export default class App extends Vue {
   }
 
   .layout {
-    display: flex;
     max-width: 90vw;
-    flex-wrap: wrap;
+    padding: var(--spacing);
     background: var(--background-secondary);
     color: var(--foreground);
   }
 
+  .row {
+    display: flex;
+    margin: calc(var(--spacing) * -1);
+  }
+
   .column {
-    margin: 2rem;
+    padding: var(--spacing);
     flex-shrink: 1;
     flex-grow: 1;
     flex-basis: 0;
   }
 
-  .column--full {
-    flex-basis: 100%; // force break to new line
+  .column--auto-width {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
   }
 </style>

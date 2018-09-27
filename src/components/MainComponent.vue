@@ -1,6 +1,6 @@
 <template>
   <form class="content">
-    <label for="textplain" class="label">Input plaintext</label>
+    <label for="textplain" class="label">Plaintext</label>
     <input class="input" type="text" id="textplain" placeholder="Plaintext" :value="textPlain" @input="updateText" />
 
     <button class="button" type="button" @click.prevent="toggleDotDash">
@@ -63,6 +63,7 @@ export default class Main extends Vue {
 
 .label {
   display: block;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 

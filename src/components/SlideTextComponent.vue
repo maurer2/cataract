@@ -1,7 +1,6 @@
 <template>
   <div class="slider">
     <div class="slider-inner">
-      <strong>Morse Code:</strong>
       <template v-if="textPlain !== ''">
         {{ textPlain }}
       </template>
@@ -26,5 +25,7 @@ export default class SlideTextComponent extends Vue {
 </script>
 
 <style lang="pcss" scoped>
-
+.slider {
+  font-size: 1rem;
+}
 </style>
