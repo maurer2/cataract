@@ -1,9 +1,12 @@
 <template>
-  <div class="slider">
-    <div class="slider-inner">
-      <template v-if="textPlain !== ''">
-        {{ textPlain }}
-      </template>
+  <div class="slider" v-if="textPlain !== ''">
+    <div class="letter" v-for="(letter, index) in textPlain" :key="index">
+      <span>
+        {{ letter }}
+      </span>
+      <span class="overlay" v-if="index === currentPosition">
+        {{ letter }}
+      </span>
     </div>
   </div>
 </template>
@@ -21,11 +24,28 @@ export default class SlideTextComponent extends Vue {
   get textPlain() {
     return (this as any).$store.getters.morseTextAsString;
   }
+
+  get currentPosition() {
+    return (this as any).$store.state.textPosition;
+  }
 }
 </script>
 
 <style lang="pcss" scoped>
 .slider {
-  font-size: 1rem;
+  display: flex;
+  font-size: 2rem;
+  line-height: 0.5;
+  color: black;
+}
+
+.letter {
+  position: relative
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  color: red;
 }
 </style>

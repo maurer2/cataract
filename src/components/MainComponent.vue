@@ -6,6 +6,10 @@
     <button class="button" type="button" @click.prevent="toggleDotDash">
       Eye Test
     </button>
+
+    <button class="button" type="button" @click.prevent="playSequence" :class="{ 'disabled': textPlain.length === 0}">
+      Next Letter
+    </button>
   </form>
 </template>
 
@@ -37,12 +41,16 @@ export default class Main extends Vue {
 
   updateMorse() {
     // dummy stuff
-    const encodedText = [ '.', '-', '.', '.' ];
+    const encodedText = [ '.', '-', '.', '.', '-', '-', '.', '-', '.', '.', '-', '-' ];
     (this as any).$store.dispatch('updateMorseText', encodedText);
   }
 
   toggleDotDash() {
     (this as any).$store.dispatch('toggleDotDash');
+  }
+
+  playSequence() {
+    (this as any).$store.dispatch('setTextPositionToNext');
   }
 
   get textPlain() {
@@ -57,8 +65,12 @@ export default class Main extends Vue {
   border: 1px solid black;
   padding: .375rem .75rem;
   font-size: 1rem;
-  font-weight: 400;
   border-radius: 0;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .label {
