@@ -1,5 +1,5 @@
 <template>
-  <div class="slider" v-if="textPlain !== ''">
+  <div class="slider">
     <div class="letter" v-for="(letter, index) in textPlain" :key="index">
       <span>
         {{ letter }}

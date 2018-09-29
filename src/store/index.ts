@@ -3,9 +3,6 @@ import Vuex from 'vuex';
 const store = () => new Vuex.Store<any>({
   strict: true,
   actions: {
-    toggleDotDash(context) {
-      context.commit('toggleDotDash');
-    },
     updatePlainText(context, data) {
       context.commit('updateTextPlain', data);
     },
@@ -14,6 +11,9 @@ const store = () => new Vuex.Store<any>({
     },
     setTextPositionToNext(context) {
       context.commit('setTextPositionToNext');
+    },
+    setTextPositionToPrevious(context) {
+        context.commit('setTextPositionToPrevious');
     },
   },
   getters: {
@@ -31,9 +31,6 @@ const store = () => new Vuex.Store<any>({
     },
   },
   mutations: {
-    toggleDotDash(state) {
-      state.isDot = !state.isDot;
-    },
     updateTextPlain(state, value) {
       state.textPlain = value;
     },
@@ -56,7 +53,6 @@ const store = () => new Vuex.Store<any>({
     },
   },
   state: {
-    isDot: false,
     textMorse: [],
     textPlain: '',
     textPosition: 0,
