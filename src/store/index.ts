@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 
 const store = () => new Vuex.Store<any>({
+  strict: true,
   actions: {
     toggleDotDash(context) {
       context.commit('toggleDotDash');
@@ -11,7 +12,7 @@ const store = () => new Vuex.Store<any>({
     updateMorseText(context, data) {
       context.commit('updateTextMorse', data);
     },
-    setTextPositionToNext(context, data) {
+    setTextPositionToNext(context) {
       context.commit('setTextPositionToNext');
     },
   },
@@ -21,6 +22,12 @@ const store = () => new Vuex.Store<any>({
     },
     morseTextAsString: (state) => {
       return state.textMorse.join('');
+    },
+    currentMorseCharacter: (state) => {
+      return state.textMorse[state.textPosition];
+    },
+    currentMorseType: (state, getters) => {
+      return getters.currentMorseCharacter === '.';
     },
   },
   mutations: {
@@ -33,8 +40,19 @@ const store = () => new Vuex.Store<any>({
     updateTextMorse(state, value) {
       state.textMorse = value;
     },
-    setTextPositionToNext(state, data) {
+    setTextPositionToNext(state) {
+      if (state.textPosition === state.textMorse.length -1) {
+        return
+      }
+
       state.textPosition = state.textPosition + 1;
+    },
+    setTextPositionToPrevious(state) {
+      if (state.textPosition === 0) {
+        return
+      }
+
+      state.textPosition = state.textPosition - 1;
     },
   },
   state: {

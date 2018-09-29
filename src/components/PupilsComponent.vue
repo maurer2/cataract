@@ -29,8 +29,8 @@ export default class PupilsComponent extends Vue {
 
     [pupilLeft, pupilRight].forEach((pupil) => {
       pupil.animate([
-        { transform: (this.isDot) ? 'scaleX(1.0)' : 'scaleX(0.5)' },
-        { transform: (this.isDot) ? 'scaleX(0.5)' : 'scaleX(1.0)' },
+        { transform: (this.currentMorseType) ? 'scaleX(0.5)' : 'scaleX(1)' },
+        { transform: (this.currentMorseType) ? 'scaleX(1.0)' : 'scaleX(0.5)' },
       ], {
         duration: 150,
         iterations: 1,
@@ -41,12 +41,8 @@ export default class PupilsComponent extends Vue {
 
   setPupilsFallback() {
     return {
-      'pupil--is-dot': this.isDot,
+      'pupil--is-dot': this.currentMorseType,
     }
-  }
-
-  get isDot() {
-    return (this as any).$store.state.isDot;
   }
 
   get pupilState() {
@@ -61,6 +57,10 @@ export default class PupilsComponent extends Vue {
     }
 
     return this.setPupilsFallback();
+  }
+
+  get currentMorseType() {
+    return (this as any).$store.getters.currentMorseType;
   }
 }
 </script>
@@ -83,12 +83,12 @@ export default class PupilsComponent extends Vue {
   height: 15%;
   border-radius: 50%;
   background: black;
-  transform: scaleX(1);
+  transform: scaleX(0.5);
   transition: transform 0.15s;
   animation-fill-mode: forwards;
 
   &--is-dot{
-    transform: scaleX(0.5);
+    transform: scaleX(1);
   }
 
   &-left {
